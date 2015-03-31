@@ -35,7 +35,8 @@
 </head>
 <body>
 	<div class="welcome">
-		<a href="http://laravel.com" title="Laravel PHP Framework">Hello <?php echo $id; ?> @ <?php echo $host; ?></a>
+    <a href="http://laravel.com" title="Laravel PHP Framework">Hello 
+<?php echo $name; ?> @ <?php echo $host; ?></a>
 		@if ($errors->any())
 
 <ul style="color:red;">
@@ -53,11 +54,11 @@
 @endif
 <ul>
     @foreach($posts as $key => $value)
-<li>{{ $value->id }} and {{ $value->code }}</li>
+<li>{{ $value->name }} and {{ $value->code }}</li>
     @endforeach
 </ul>
 		    {{ Form::open(array('url' => '/ux')) }}
-<input type="hidden" name="id" value="<?php echo $id;?>"></input>
+<input type="hidden" name="name" value="<?php echo $name;?>"></input>
  
         <p>Text :</p>
  

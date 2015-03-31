@@ -17,15 +17,16 @@ class PageController extends BaseController {
 
 	public function buildPage($id)
 	{	$host = $_SERVER['REMOTE_ADDR'];
-		$posts = Page::all();
-    		return View::make('page')->with('id', $id)->with('posts',$posts)->with('host', $host);
+		$posts = Page::get5RandomPosts();
+    $name = hash('crc32',$id);
+    		return View::make('page')->with('id', $id)->with('name',$name)->with('posts',$posts)->with('host', $host);
 	}
-    public function store()
+    public function store($id)
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'id'       => 'required',
+            'name'       => 'required',
             'code'      => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
@@ -36,7 +37,7 @@ class PageController extends BaseController {
                 ->withErrors($validator);
         } else {
             // store
-	    $id = '/u/'.Input::get('id');
+	    $id = '/u/'.$id;//Input::get('id');
 	    Page::saveFormData(Input::except(array('_token')));
             return Redirect::to($id)->withMessage('Done!');
         }
