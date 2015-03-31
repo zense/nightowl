@@ -21,7 +21,7 @@ class PageController extends BaseController {
     $name = hash('crc32',$id);
     		return View::make('page')->with('id', $id)->with('name',$name)->with('posts',$posts)->with('host', $host);
 	}
-    public function store($id)
+    public function store()
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
@@ -37,7 +37,7 @@ class PageController extends BaseController {
                 ->withErrors($validator);
         } else {
             // store
-	    $id = '/u/'.$id;//Input::get('id');
+	    $id = '/u/'.Session::getId();
 	    Page::saveFormData(Input::except(array('_token')));
             return Redirect::to($id)->withMessage('Done!');
         }
