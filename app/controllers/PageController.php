@@ -18,8 +18,19 @@ class PageController extends BaseController {
 	public function buildPage($id)
 	{	$host = $_SERVER['REMOTE_ADDR'];
 		$posts = Page::get5RandomPosts();
-    $name = hash('crc32',$id);
-    		return View::make('page')->with('id', $id)->with('name',$name)->with('posts',$posts)->with('host', $host);
+		$rules = array('id' => 'unique:users,id');
+		$validator = Validator::make(array('id'=>$id) , $rules);
+		$obj = new User;
+
+        	if ($validator->fails()) {
+			$user = $obj->where('id','=',$id)->get();
+		}
+		else{
+			$name = hash('crc32',$id);
+			$obj->store(array('id'=>$id, 'name'=>$name));
+			$user = $obj->where('id','=',$id)->get();
+		}
+    		return View::make('page')->with('id', $user[0]->id)->with('name',$user['0']->name)->with('posts',$posts)->with('host', $host);
 	}
     public function store()
     {
