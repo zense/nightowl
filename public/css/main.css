@@ -1,0 +1,41 @@
+#site-logo a {
+  color: #ffffff;
+  text-decoration: none;
+}
+#site-logo a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.thought {
+  margin-bottom: 6em;
+}
+
+.thought-content {
+  white-space: pre-line;
+}
+
+.debug-info {
+  padding-left: 42px;
+}
+
+.thought-input-label {
+  display: none;
+}
+
+#about-info li {
+  margin-top: 1em;
+}
+
+#contact-info {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+#site-footer {
+  padding-bottom: 2em;
+}
+
+#site-footer span {
+  margin-right: 2em;
+}
