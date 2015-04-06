@@ -118,10 +118,10 @@
 <div class="row user-info">
   <div class="col-md-12">
     <h3>Who You Are</h3>
-    <div>You are <?php echo $name;?></div>
+    <div>You are <a href="<?php echo URL::to('/profile'); ?>"><?php echo $name;?></a></div>
     
       <div>
-        You should bookmark this link: <a href="<?php echo Request::Url(); ?>"><?php echo Request::Url(); ?></a> as it is your
+        You should bookmark this link: <a href="<?php echo User::getURL($id); ?>"><?php echo User::getURL($id); ?></a> as it is your
         identity here, and the key to your personalised feed. Don't share your identity
         with anyone else.
       </div>
@@ -129,9 +129,8 @@
     <h3>Where You Are</h3>
     <div>
       <p>
-        Owl is a network of anonymous people sharing their thoughts. Every day at
-        03:00:00 UTC a new feed of thoughts is randomly generated for you. You may post
-        one thought per day, which will be included in other peoples feeds.
+        Owl is a network of anonymous people sharing their thoughts. You may post
+        any number of thoughts per day, which will be included in other peoples feeds.
       </p>
       <p>Please don't post spam or abusive content here.</p>
     </div>
@@ -139,16 +138,14 @@
 </div>
 
 
-  <hr>
-
           <div class="row" id="site-footer">
             <div class="col-md-12">
               <hr>
               <span>
-                <a href="https://zense-proxy.appspot.com/nightOwl.com/about">About</a>
+                <a href="<?php echo URL::to('/about'); ?>">About</a>
               </span>
               <span>
-                <a href="https://zense-proxy.appspot.com/nightOwl.tumblr.com" target="_blank">Blog</a>
+                <a href="<?php echo URL::to('/blog'); ?>" target="_blank">Blog</a>
               </span>
             </div>
           </div>

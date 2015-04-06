@@ -42,4 +42,8 @@ class User extends Eloquent {
 			->get();
 		return $posts;
 	}
+	public static function getURL($id){
+		return URL::to('/u/'.$id);
+
+	}
 }
