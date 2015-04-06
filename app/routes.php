@@ -26,7 +26,11 @@ Route::post('/ux', function(){
 	//return 's';
 });
 
+Route::get('/profile', function(){
+	$user = User::find(Session::getId());
+	return Redirect::to('/'.$user->name);
+});
 
-Route::get('/profile/', 'PageController@profile');
+Route::get('/{name}', 'PageController@profile');
 Route::resource('nerds', 'NerdController');
 Route::model('user', 'User');

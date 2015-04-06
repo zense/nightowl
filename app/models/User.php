@@ -26,9 +26,9 @@ class User extends Eloquent {
 	 * @return mixed
 	 */
 
-	public function getName()
+	public static function getbyName($name)
 	{
-		return $this->name;
+		return User::where('name','=',$name)->first();
 	}
 
 	public static function store($data) {

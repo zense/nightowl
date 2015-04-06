@@ -37,7 +37,7 @@
           <div class="row" id="main-content">
             <div class="col-md-12">
 	    <h1 id="site-logo">
-              <a href="/">My Profile</a>
+              <a href="<?php echo URL::to('/'.$name);?>"><?php echo $name;?> Profile</a>
             </h1>
 @if ($errors->any())
 <div class="alert alert-warning alert-dismissible" role="alert">
@@ -69,29 +69,6 @@
         @endforeach    
     </div>
   </div>
-
-  <hr>
-  
-<div class="row user-info">
-  <div class="col-md-12">
-    <h3>Who You Are</h3>
-    <div>You are <a href="<?php echo URL::to('/profile'); ?>"><?php echo $name;?></a></div>
-    
-      <div>
-        You should bookmark this link: <a href="<?php echo User::getURL($id); ?>"><?php echo User::getURL($id); ?></a> as it is your
-        identity here, and the key to your personalised feed. Don't share your identity
-        with anyone else.
-      </div>
-    
-    <h3>Where You Are</h3>
-    <div>
-      <p>
-        Owl is a network of anonymous people sharing their thoughts.
-      </p>
-      <p>Please don't post spam or abusive content here.</p>
-    </div>
-  </div>
-</div>
 
           <div class="row" id="site-footer">
             <div class="col-md-12">

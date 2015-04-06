@@ -61,9 +61,9 @@ class PageController extends BaseController {
             return Redirect::to($id)->withMessage('Done!');
         }
     }
-    public function profile(){
-	$id = Session::getId();
-	$user = User::find($id);
+    public function profile($name){
+	//$id = Session::getId();
+	$user = User::getByName($name);
 	$posts = $user->allPosts($user->id);
 	return View::make('profile')->with(array('posts'=>$posts,'id'=>$user->id, 'name'=>$user->name));
 	}

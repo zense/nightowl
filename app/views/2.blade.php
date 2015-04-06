@@ -59,7 +59,7 @@
         <div class="thought-content text-center">{{ $value->code }}</div>
         <div class="thought-footer">
           <span class="pull-right">
-            <em>— {{ $value->name }}</em>
+            <em>— <a href="<?php echo URL::to('/'.$value->name); ?>">{{ $value->name }}</a></em>
           </span>
         </div>
       </div>
