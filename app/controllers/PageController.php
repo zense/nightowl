@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class PageController extends BaseController {
 
 	/*
@@ -17,20 +17,28 @@ class PageController extends BaseController {
 
 	public function buildPage($id)
 	{	$host = $_SERVER['REMOTE_ADDR'];
-		$posts = Page::get5RandomPosts();
-		$rules = array('id' => 'unique:users,id');
-		$validator = Validator::make(array('id'=>$id) , $rules);
-		$obj = new User;
-
-        	if ($validator->fails()) {
-			$user = $obj->where('id','=',$id)->get();
+		//$rules = array('id' => 'unique:users,id');
+		//$validator = Validator::make(array('id'=>$id) , $rules);
+		//$obj = new User;
+		try {
+			$user = User::findOrFail($id);
 		}
-		else{
+//        	if ($validator->fails()) {
+//			$user = $obj->where('id','=',$id)->get();
+//		}
+		catch(ModelNotFoundException $e){
 			$name = hash('crc32',$id);
-			$obj->store(array('id'=>$id, 'name'=>$name));
-			$user = $obj->where('id','=',$id)->get();
+			//return $id;
+			$user = User::store(array('id'=>$id, 'name'=>$name));
+			$user = User::findOrFail($id);
 		}
-    		return View::make('page')->with('id', $user[0]->id)->with('name',$user['0']->name)->with('posts',$posts)->with('host', $host);
+		//else{
+		//	$name = hash('crc32',$id);
+		//	$obj->store(array('id'=>$id, 'name'=>$name));
+		//	$user = $obj->where('id','=',$id)->get();
+		//}
+		$posts = Page::get5RandomPosts($user->name);
+    		return View::make('2')->with('id', $user->id)->with('name',$user->name)->with('posts',$posts)->with('host', $host);
 	}
     public function store()
     {
@@ -53,6 +61,10 @@ class PageController extends BaseController {
             return Redirect::to($id)->withMessage('Done!');
         }
     }
-
-
+    public function profile(){
+	$id = Session::getId();
+	$user = User::find($id);
+	$posts = $user->allPosts($user->id);
+	return View::make('profile')->with(array('posts'=>$posts,'id'=>$user->id, 'name'=>$user->name));
+	}
 }

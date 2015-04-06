@@ -6,8 +6,9 @@ class Page extends Eloquent {
     DB::table('data')->insert($data);
   }
 
-  public static function get5RandomPosts() {
+  public static function get5RandomPosts($name) {
     $posts = DB::table('data')
+              ->where('name','!=',$name)
               ->orderByRaw("RAND()")
               ->take(5)
               ->get();

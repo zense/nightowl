@@ -18,6 +18,7 @@ class User extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array('password');
+	protected $fillable = array('id','name');
 
 	/**
 	 * Get the unique identifier for the user.
@@ -34,4 +35,11 @@ class User extends Eloquent {
 		DB::table('users')->insert($data);
 	}
 
+	public static function allPosts($id){
+		$user = User::find($id);
+		$posts = DB::table('data')
+			->where('name','=',$user->name)
+			->get();
+		return $posts;
+	}
 }

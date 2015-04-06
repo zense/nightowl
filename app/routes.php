@@ -26,9 +26,7 @@ Route::post('/ux', function(){
 	//return 's';
 });
 
-Route::get('profile/{user}', function(User $user)
-{
-    //
-});
 
+Route::get('/profile/', 'PageController@profile');
 Route::resource('nerds', 'NerdController');
+Route::model('user', 'User');
