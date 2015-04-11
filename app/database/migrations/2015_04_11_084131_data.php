@@ -16,7 +16,7 @@ class Data extends Migration {
 		{	
 			$table->string('name');
 			$table->text('code');
-			$table->timestamps();
+			$table->timestamp('created')->default(DB::raw('CURRENT_TIMESTAMP'));
 		});
 	}
 
