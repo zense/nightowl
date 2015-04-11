@@ -35,10 +35,9 @@ class User extends Eloquent {
 		DB::table('users')->insert($data);
 	}
 
-	public static function allPosts($id){
-		$user = User::find($id);
+	public function allPosts(){
 		$posts = DB::table('data')
-			->where('name','=',$user->name)
+			->where('name','=',$this->name)
 			->get();
 		return $posts;
 	}
