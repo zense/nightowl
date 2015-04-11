@@ -9,7 +9,7 @@ class Page extends Eloquent {
   public static function get5RandomPosts($name) {
     $posts = DB::table('data')
               ->where('name','!=',$name)
-              ->orderByRaw("RANDOM()")
+              ->orderByRaw("RAND()")
               ->take(10)
               ->get();
     return $posts;
