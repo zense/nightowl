@@ -83,7 +83,7 @@ class UserController extends BaseController {
 	}
     	public function profile($name){
 		$user = User::getByName($name);
-		return json_encode($user);
+		//return json_encode($user);
 		$posts = $user->allPosts();
 		return View::make('profile')->with(array('posts'=>$posts,'id'=>$user->id, 'name'=>$user->name));
 	}

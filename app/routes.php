@@ -20,11 +20,7 @@ Route::get('/', function()
 
 Route::get('/u/{id}', 'PageController@buildPage');
 
-Route::post('/ux', function(){
-	$obj = new PageController();
-	return $obj->store();
-	//return 's';
-});
+Route::post('/ux', 'PageController@store');
 
 Route::get('/profile', function(){
 	$user = User::find(Session::getId());
