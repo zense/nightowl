@@ -20,8 +20,6 @@ Route::get('/', function()
 
 Route::get('/u/{id}', 'PageController@buildPage');
 
-Route::post('/ux', 'PageController@store');
-
 Route::get('/profile', function(){
 	$user = User::find(Session::getId());
 	return Redirect::to('/'.$user->name);
@@ -34,3 +32,6 @@ Route::post('/profile', function(){
 
 
 Route::get('/{name}', 'UserController@profile');
+
+Route::post('/ux', 'PageController@store');
+
