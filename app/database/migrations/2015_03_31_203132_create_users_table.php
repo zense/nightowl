@@ -13,7 +13,8 @@ class CreateUsersTable extends Migration {
 	public function up()
 	{
 		Schema::create('users', function(Blueprint $table)
-		{
+		{	
+			$table->integer('user_id')->unsigned();//->primary();
 			$table->string('id')->primary();
 			$table->string('name')->unique();
 			$table->timestamps();

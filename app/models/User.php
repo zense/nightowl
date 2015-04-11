@@ -46,4 +46,14 @@ class User extends Eloquent {
 		return URL::to('/u/'.$id);
 
 	}
+
+	public function followers(){
+	    return $this->belongsToMany('User', 'followers', 'follow_id', 'user_id')->withTimestamps();
+	}
+
+	// Get all users we are following
+	public function following(){
+	    return $this->belongsToMany('User', 'followers', 'user_id', 'follow_id')->withTimestamps();
+	}
+
 }

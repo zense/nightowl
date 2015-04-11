@@ -16,29 +16,17 @@ class PageController extends BaseController {
 	*/
 
 	public function buildPage($id)
-	{	$host = $_SERVER['REMOTE_ADDR'];
-		//$rules = array('id' => 'unique:users,id');
-		//$validator = Validator::make(array('id'=>$id) , $rules);
-		//$obj = new User;
-		try {
+	{	try {
 			$user = User::findOrFail($id);
 		}
-//        	if ($validator->fails()) {
-//			$user = $obj->where('id','=',$id)->get();
-//		}
 		catch(ModelNotFoundException $e){
 			$name = hash('crc32',$id);
 			//return $id;
 			$user = User::store(array('id'=>$id, 'name'=>$name));
-			$user = User::findOrFail($id);
+			$user = User::find($id);
 		}
-		//else{
-		//	$name = hash('crc32',$id);
-		//	$obj->store(array('id'=>$id, 'name'=>$name));
-		//	$user = $obj->where('id','=',$id)->get();
-		//}
 		$posts = Page::get5RandomPosts($user->name);
-    		return View::make('2')->with('id', $user->id)->with('name',$user->name)->with('posts',$posts)->with('host', $host);
+    		return View::make('2')->with('id', $user->id)->with('name',$user->name)->with('posts',$posts);
 	}
     public function store()
     {
@@ -62,7 +50,6 @@ class PageController extends BaseController {
         }
     }
     public function profile($name){
-	//$id = Session::getId();
 	$user = User::getByName($name);
 	$posts = $user->allPosts($user->id);
 	return View::make('profile')->with(array('posts'=>$posts,'id'=>$user->id, 'name'=>$user->name));
