@@ -37,13 +37,8 @@
           <div class="row" id="main-content">
             <div class="col-md-12">
 	    <h1 id="site-logo">
-              <a href="<?php echo URL::to('/'.$username);?>"><?php echo $name;?>'s Profile</a>
+              <a href="<?php echo URL::to('/'.$username);?>"><?php echo $username;?> Profile</a>
             </h1>
-            @if ($following == 1)
-            <button type="button" id="follow" class="btn btn-success" data-dismiss="alert">Following</button>
-            @elseif ($following == 0)
-            <button type="button" id="follow" class="btn btn-primary" data-dismiss="alert">Follow</button>
-            @endif
 @if ($errors->any())
 <div class="alert alert-warning alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -58,23 +53,30 @@
 </div>
 @endif
 
-  <hr>
+<hr>
 
-  <div class="thought-list row">
-    <div class="col-md-10 col-md-offset-1">
-        @foreach($posts as $key => $value)
-      <div class="thought ">
-        <div class="thought-content text-center">{{ $value->text }}</div>
-        <div class="thought-footer">
-          <span class="pull-right">
-            <em>— {{ $value->updated_at }}</em>
-          </span>
-        </div>
-      </div>
-        @endforeach
+<div class="row">
+
+<div class="thought-submission col-md-10 col-md-offset-1">
+  {{ Form::open(array('/profile/edit','POST')) }}
+  {{ Form::hidden('id', $id) }}
+  {{ Form::text('username', $username) }}
+  {{ Form::text('name', $name) }}
+  {{ Form::text('email', $email) }}
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary pull-right">
+        Submit
+      </button>
     </div>
-  </div>
 
+  {{ Form::close() }}
+</div>
+
+
+</div>
+
+
+  <hr>
           <div class="row" id="site-footer">
             <div class="col-md-12">
               <hr>
@@ -91,24 +93,5 @@
       </div>
     </div>
 
-    <script type="text/javascript">
-        $("#follow").click(function(e){
-          e.preventDefault();
-          if($('#follow').html() == 'Follow'){
-            $.getJSON('<?php echo URL::to('/'.$username);?>/follow',function(data){
-              console.log(data);
-              if(data.status == 1){
-                $('#follow').html('Following').attr('class','btn btn-success');
-              }
-            });
-          }else{
-            $.getJSON('<?php echo URL::to('/'.$username);?>/unfollow',function(data){
-              console.log(data);
-              if(data.status == 1){
-                $('#follow').html('Follow').attr('class','btn btn-primary');
-              }
-            });
-          }
-        });
-    </script>
+
 </body></html>

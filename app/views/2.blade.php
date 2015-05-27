@@ -30,8 +30,8 @@
           </div>
 
           <div id="flash">
-            
-            
+
+
           </div>
 
           <div class="row" id="main-content">
@@ -49,53 +49,53 @@
   <p>{{ Session::get('message') }}</p>
 </div>
 @endif
-              
+
   <hr>
 
   <div class="thought-list row">
     <div class="col-md-10 col-md-offset-1">
-        @foreach($posts as $key => $value) 
+        @foreach($posts as $key => $value)
       <div class="thought ">
-        <div class="thought-content text-center">{{ $value->code }}</div>
+        <div class="thought-content text-center">{{ $value->text }}</div>
         <div class="thought-footer">
           <span class="pull-right">
-            <em>— <a href="<?php echo URL::to('/'.$value->name); ?>">{{ $value->name }}</a></em>
+            <em>— <a href="<?php echo URL::to('/'.$value->author->username); ?>">{{ $value->author->username }}</a></em>
           </span>
         </div>
       </div>
-        @endforeach    
+        @endforeach
     </div>
   </div>
 
   <hr>
 
   <div class="row">
-    
-        
+
+
 
 
 <div class="thought-submission col-md-10 col-md-offset-1">
   <form role="form" class="form-horizontal" id="thought-form" action="/ux/" method="post">
 
-      
 
 
 
-  <input name="name" value="<?php echo $name;?>" type="hidden">
+
+  <input name="username" value="<?php echo $username;?>" type="hidden">
 
 
 
-      
+
 
 <div>
-  
+
 </div>
 
 
       <div class="form-group">
         <label for="content" class="thought-input-label">Your Thoughts</label>
-        <textarea id="content" name="code" class="form-control" placeholder="Your Thoughts..." rows="5"></textarea>
-        
+        <textarea id="content" name="text" class="form-control" placeholder="Your Thoughts..." rows="5"></textarea>
+
       </div>
 
       <div class="form-group">
@@ -107,25 +107,25 @@
   </form>
 </div>
 
-      
+
   </div>
   <div class="row text-center">
   </div>
 
   <hr>
 
-  
+
 <div class="row user-info">
   <div class="col-md-12">
     <h3>Who You Are</h3>
-    <div>You are <a href="<?php echo URL::to('/profile'); ?>"><?php echo $name;?></a></div>
-    
+    <div>You are <a href="<?php echo URL::to('/profile'); ?>"><?php echo $username;?></a></div>
+
       <div>
-        You should bookmark this link: <a href="<?php echo User::getURL($id); ?>"><?php echo User::getURL($id); ?></a> as it is your
+        You should bookmark this link: <a href="<?php echo User::getURL($code); ?>"><?php echo User::getURL($code); ?></a> as it is your
         identity here, and the key to your personalised feed. Don't share your identity
         with anyone else.
       </div>
-    
+
     <h3>Where You Are</h3>
     <div>
       <p>
@@ -153,6 +153,6 @@
         </div>
       </div>
     </div>
-  
+
 
 </body></html>

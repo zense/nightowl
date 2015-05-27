@@ -8,33 +8,35 @@ class PageController extends BaseController {
 	|--------------------------------------------------------------------------
 	|
 	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
+	| based routes. That's great! Here is an eLifehacker
+30 mins ·
+
+Keep those extension cords from getting tangled.xample controller method to
 	| get you started. To route to this controller, just add the route:
 	|
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
 
-	public function buildPage($id)
-	{	try {
-			$user = User::findOrFail($id);
-		}
-		catch(ModelNotFoundException $e){
-			$name = hash('crc32',$id);
+	public function buildPage($code)
+	{
+		$user = User::getbyCode($code);
+		if(!$user){
+			$username = hash('crc32',$code);
 			//return $id;
-			$user = User::store(array('id'=>$id, 'name'=>$name));
-			$user = User::find($id);
+			$user = User::store(array('code'=>$code, 'username'=>$username));
+			$user = User::getbyCode($code);
 		}
-		$posts = Page::get5RandomPosts($user->name);
-    		return View::make('2')->with('id', $user->id)->with('name',$user->name)->with('posts',$posts);
+		$posts = $user->getFeed();
+    return View::make('2',$user)->with('posts',$posts);
 	}
     public function store()
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'name'       => 'required',
-            'code'      => 'required'
+            'username'  => 'required',
+            'text'      => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -44,9 +46,11 @@ class PageController extends BaseController {
                 ->withErrors($validator);
         } else {
             // store
-	    $id = '/u/'.Session::getId();
-	    Page::saveFormData(Input::except(array('_token')));
-            return Redirect::to($id)->withMessage('Done!');
+	    $code = '/u/'.Session::getId();
+			$post = new Post(Input::all());
+			$user = User::getbyName(Input::get('username'));
+			$user->posts()->save($post);
+      return Redirect::to($code)->withMessage('Done!');
         }
     }
 }

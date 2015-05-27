@@ -18,7 +18,7 @@ class User extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array('password');
-	protected $fillable = array('id','name');
+	protected $fillable = array('id','username','name','email');
 
 	/**
 	 * Get the unique identifier for the user.
@@ -26,26 +26,25 @@ class User extends Eloquent {
 	 * @return mixed
 	 */
 
-	public static function getbyName($name)
+	public static function getbyName($username)
 	{
-		return User::where('name','=',$name)->first();
+		return User::where('username','=',$username)->first();
 	}
 
 	public static function store($data) {
 		DB::table('users')->insert($data);
 	}
 
-	public function allPosts(){
-		$posts = DB::table('data')
-			->where('name','=',$this->name)
-			->get();
-		return $posts;
+	public function posts(){
+		return $this->hasMany('Post', 'user','id');
 	}
-	public static function getURL($id){
-		return URL::to('/u/'.$id);
-
+	public static function getbyCode($code){
+		return User::where('code','=',$code)->first();
 	}
 
+	public static function getURL($code){
+		return URL::to('/u/'.$code);
+	}
 	public function followers(){
 	    return $this->belongsToMany('User', 'followers', 'follow_id', 'user_id')->withTimestamps();
 	}
@@ -55,4 +54,10 @@ class User extends Eloquent {
 	    return $this->belongsToMany('User', 'followers', 'user_id', 'follow_id')->withTimestamps();
 	}
 
+	public function getFeed()
+  {
+    $userIds = $this->following()->lists('follow_id');
+    $userIds[] = $this->id;
+    return Post::whereIn('user', $userIds)->latest()->get();
+	}
 }

@@ -16,6 +16,7 @@ class CreateFollowersTable extends Migration {
 		    $table->integer('user_id')->unsigned();
 		    $table->integer('follow_id')->unsigned();
 		    $table->timestamps();
+				$table->unique(array('user_id','follow_id'));
 		});
 	}
 

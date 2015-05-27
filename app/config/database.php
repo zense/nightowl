@@ -1,9 +1,17 @@
 <?php
 $url = parse_url(getenv("DATABASE_URL"));
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
+if(sizeof($url)==0){
+  $host = $url["host"];
+  $username = $url["user"];
+  $password = $url["pass"];
+  $database = substr($url["path"], 1);
+}
+else{
+  $host = '127.0.0.1';
+  $username = 'nightowl';
+  $password = 'thanks123';
+  $database = 'nightowl';
+}
 return array(
 
 	/*
@@ -30,7 +38,7 @@ return array(
 	|
 	*/
 
-	'default' => 'pgsql',
+	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------

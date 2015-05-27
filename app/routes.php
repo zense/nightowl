@@ -13,25 +13,23 @@
 Route::model('user', 'User');
 
 Route::get('/', function()
-{	$id = '/u/';
-	$id .= Session::getId();
-	return Redirect::to($id);
+{	$code = '/u/';
+	$code .= Session::getId();
+	return Redirect::to($code);
 });
 
-Route::get('/u/{id}', 'PageController@buildPage');
+Route::get('/u/{code}', 'PageController@buildPage');
 
 Route::get('/profile', function(){
-	$user = User::find(Session::getId());
-	return Redirect::to('/'.$user->name);
+	$user = User::getbyCode(Session::getId());
+	return UserController::profile($user->username);
 });
-
-Route::post('/profile', function(){
-	$user = User::find(Session::getId());
-	return Redirect::to('/'.$user->name);
-});
-
 
 Route::get('/{name}', 'UserController@profile');
+Route::get('/profile/edit', 'UserController@edit');
+Route::post('/profile/edit', 'UserController@update');
 
 Route::post('/ux', 'PageController@store');
 
+Route::get('{username}/follow','UserController@follow');
+Route::get('{username}/unfollow','UserController@unfollow');

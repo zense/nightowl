@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Data extends Migration {
+class CreatPostsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,12 @@ class Data extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('data', function(Blueprint $table)
-		{	
-			$table->string('name');
-			$table->text('code');
-			$table->timestamp('created')->default(DB::raw('CURRENT_TIMESTAMP'));
+		Schema::create('posts', function($table)
+		{
+			$table->increments('id');
+			$table->integer('user')->unsigned();
+			$table->text('text');
+			$table->timestamps();
 		});
 	}
 
@@ -27,7 +28,7 @@ class Data extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('data');
+		Schema::drop('posts');
 	}
 
 }
