@@ -1,16 +1,17 @@
 <?php
 $url = parse_url(getenv("DATABASE_URL"));
-if(sizeof($url)==0){
-  $host = $url["host"];
-  $username = $url["user"];
-  $password = $url["pass"];
-  $database = substr($url["path"], 1);
-}
-else{
-  $host = '127.0.0.1';
-  $username = 'nightowl';
-  $password = 'thanks123';
-  $database = 'nightowl';
+if(count($url)==0){
+	$driver = 'pgsql';
+	$host = $url["host"];
+	$username = $url["user"];
+	$password = $url["pass"];
+	$database = substr($url["path"], 1);
+}else{
+	$driver = 'mysql';
+	$host = '127.0.0.1';
+	$username = 'nightowl';
+	$password = 'thanks123';
+	$database = 'nightowl';
 }
 return array(
 
@@ -38,7 +39,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => $driver,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -66,10 +67,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1',
-			'database'  => 'nightowl',
-			'username'  => 'nightowl',
-			'password'  => 'thanks123',
+			'host'     => $host,
+			'database' => $database,
+			'username' => $username,
+			'password' => $password,
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

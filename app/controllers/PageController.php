@@ -28,6 +28,9 @@ Keep those extension cords from getting tangled.xample controller method to
 			$user = User::getbyCode($code);
 		}
 		$posts = $user->getFeed();
+		if(count($posts)==0){
+			$posts = Post::get5RandomPosts($user->id);
+		}
     return View::make('2',$user)->with('posts',$posts);
 	}
     public function store()

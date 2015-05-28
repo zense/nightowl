@@ -87,10 +87,6 @@ class UserController extends BaseController {
 			$user->name       = Input::get('name');
 			$user->email      = Input::get('email');
 			if($user->username != Input::get('username')){
-				foreach($user->posts as $post){
-					$post->username = Input::get('username');
-					$post->save();
-				}
 				$user->username   = Input::get('username');
 			}
 			$user->save();
