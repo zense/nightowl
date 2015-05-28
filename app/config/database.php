@@ -1,6 +1,6 @@
 <?php
 $url = parse_url(getenv("DATABASE_URL"));
-if(count($url)==0){
+if(sizeof($url)==0){
 	$driver = 'pgsql';
 	$host = $url["host"];
 	$username = $url["user"];
