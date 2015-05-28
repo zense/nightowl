@@ -6,12 +6,6 @@ if(count($url)==0){
 	$username = $url["user"];
 	$password = $url["pass"];
 	$database = substr($url["path"], 1);
-}else{
-	$driver = 'mysql';
-	$host = '127.0.0.1';
-	$username = 'nightowl';
-	$password = 'thanks123';
-	$database = 'nightowl';
 }
 return array(
 
