@@ -24,11 +24,9 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
-
-	'local' => array('arkokoley-PC'),
-
-));
+$env = $app->detectEnvironment(function () {
+	return isset($_ENV['OPENSHIFT_PHP_DIR']) ? 'production' : 'local';
+});
 
 /*
 |--------------------------------------------------------------------------

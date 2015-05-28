@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => true,
+	'debug' => getenv('APPLICATION_ENV') == 'development' ? true : false,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost:8000',
+	'url' => 'https://' . getenv('OPENSHIFT_APP_DNS') . '/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'tbWjsdZFyteYfnEL01TgmVTWYr4kM9nw',
+	'key' => substr(getenv('OPENSHIFT_SECRET_KEY'), 0, 31),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 

@@ -1,0 +1,33 @@
+#!/bin/bash
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+set -e
+
+echo
+echo "Migrating storage and log directories..."
+echo 
+# If this is initial installation, move the default storage directory
+# from official Laravel installation and remove the log directory
+#
+if [ ! -d ${OPENSHIFT_DATA_DIR}storage ]; then
+  mv ${OPENSHIFT_REPO_DIR}app/storage ${OPENSHIFT_DATA_DIR}storage
+  rm -rf ${OPENSHIFT_DATA_DIR}storage/logs
+fi
+
+# Create symlink to new storage directory location
+ln -sf ${OPENSHIFT_DATA_DIR}storage   ${OPENSHIFT_REPO_DIR}app/storage
+
+# Create a symlink to the new log directory location
+ln -sf ${OPENSHIFT_LOG_DIR}   ${OPENSHIFT_DATA_DIR}storage/logs
+
+echo 
+echo "Running 'php artisan migrate --force'..."
+echo 
+pushd ${OPENSHIFT_REPO_DIR} > /dev/null
+php artisan migrate --force
+popd > /dev/null
