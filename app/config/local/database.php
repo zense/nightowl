@@ -17,15 +17,16 @@ return array(
 	| choice installed on your machine before you begin development.
 	|
 	*/
+	'default' => 'mysql',
 
 	'connections' => array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'homestead',
-			'username'  => 'homestead',
-			'password'  => 'secret',
+			'host'      => '127.0.0.1',
+			'database'  => 'nightowl',
+			'username'  => 'nightowl',
+			'password'  => 'thanks123',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

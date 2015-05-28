@@ -1,12 +1,5 @@
 <?php
 $url = parse_url(getenv("DATABASE_URL"));
-if(sizeof($url)==0){
-	$driver = 'pgsql';
-	$host = $url["host"];
-	$username = $url["user"];
-	$password = $url["pass"];
-	$database = substr($url["path"], 1);
-}
 return array(
 
 	/*
@@ -33,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => $driver,
+	'default' => 'pgsql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -61,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'     => $host,
-			'database' => $database,
-			'username' => $username,
-			'password' => $password,
+			'host'     => '',
+			'database' => '',
+			'username' => '',
+			'password' => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -72,10 +65,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => $host,
-			'database' => $database,
-			'username' => $username,
-			'password' => $password,
+			'host'     => $url["host"],
+			'database' => substr($url["path"], 1),
+			'username' => $url["user"],
+			'password' => $url["pass"],
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
