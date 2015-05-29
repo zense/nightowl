@@ -58,7 +58,7 @@ class User extends Eloquent {
   {
     $userIds = $this->following()->lists('follow_id');
 		if(count($userIds)==0){
-			return Post::all()->latest()->get();
+			return Post::get5RandomPosts($this->id);
 		}
     $userIds[] = $this->id;
     return Post::whereIn('user', $userIds)->latest()->get();
