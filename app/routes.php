@@ -25,7 +25,7 @@ Route::get('/profile', function(){
 	return UserController::profile($user->username);
 });
 
-Route::get('/@{name}', 'UserController@profile');
+Route::get('/{name}', 'UserController@profile');
 Route::get('/profile/edit', 'UserController@edit');
 Route::post('/profile/edit', 'UserController@update');
 
