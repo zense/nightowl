@@ -10,7 +10,7 @@
     <link rel="stylesheet" media="screen" href="/css/bootstrap.css">
 
     <!-- Favicon-->
-    <link rel="shortcut icon" type="image/png" href="">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
 
     <!-- Javascript -->
     <script src="/js/jquery-2.js" type="text/javascript"></script>

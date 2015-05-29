@@ -24,7 +24,12 @@ Route::get('/profile', function(){
 	$user = User::getbyCode(Session::getId());
 	return UserController::profile($user->username);
 });
-
+Route::get('/about', function(){
+	return View::make('about');
+});
+Route::get('/blog', function(){
+	return Redirect::to('http://arkokoley.github.io/');
+});
 Route::get('/{name}', 'UserController@profile');
 Route::get('/profile/edit', 'UserController@edit');
 Route::post('/profile/edit', 'UserController@update');
