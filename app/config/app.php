@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => getenv('APPLICATION_ENV') == 'development' ? true : false,
+	'debug' => 'true',//getenv('APPLICATION_ENV') == 'development' ? true : false,
 
 	/*
 	|--------------------------------------------------------------------------

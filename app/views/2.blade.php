@@ -121,7 +121,7 @@
     <div>You are <a href="<?php echo URL::to('/profile'); ?>"><?php echo $username;?></a></div>
 
       <div>
-        You should bookmark this link: <a href="<?php echo User::getURL($code); ?>"><?php echo User::getURL($code); ?></a> as it is your
+        You should bookmark this link: <a href="<?php echo $url; ?>"><?php echo $url; ?></a> as it is your
         identity here, and the key to your personalised feed. Don't share your identity
         with anyone else.
       </div>

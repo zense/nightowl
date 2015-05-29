@@ -24,11 +24,10 @@ Keep those extension cords from getting tangled.xample controller method to
 		if(!$user){
 			$username = hash('crc32',$code);
 			//return $id;
-			$user = User::store(array('code'=>$code, 'username'=>$username));
-			$user = User::getbyCode($code);
+			$user =  User::create(array('code'=>$code, 'username'=>$username));
 		}
 		$posts = $user->getFeed();
-    return View::make('2',$user)->with('posts',$posts);
+    return View::make('2',$user)->with(array('posts' => $posts, 'url' => $user->getURL()));
 	}
     public function store()
     {

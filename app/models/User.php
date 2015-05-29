@@ -18,7 +18,7 @@ class User extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array('password');
-	protected $fillable = array('id','username','name','email');
+	protected $fillable = array('code','username','name','email');
 
 	/**
 	 * Get the unique identifier for the user.
@@ -42,8 +42,8 @@ class User extends Eloquent {
 		return User::where('code','=',$code)->first();
 	}
 
-	public static function getURL($code){
-		return URL::to('/u/'.$code);
+	public function getURL(){
+		return URL::to('/u/'.$this->code);
 	}
 	public function followers(){
 	    return $this->belongsToMany('User', 'followers', 'follow_id', 'user_id')->withTimestamps();
@@ -57,10 +57,9 @@ class User extends Eloquent {
 	public function getFeed()
   {
     $userIds = $this->following()->lists('follow_id');
-		if(count($userIds)==0){
-			return Post::get5RandomPosts($this->id);
-		}
     $userIds[] = $this->id;
-    return Post::whereIn('user', $userIds)->latest()->get();
+		$posts = Post::whereIn('user', $userIds)->latest()->get();
+		$RandomPosts = Post::whereNotIn('user',$userIds)->take(10)->get();
+		return $posts->merge($RandomPosts);
 	}
 }
