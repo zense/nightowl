@@ -75,7 +75,7 @@
 
 
 <div class="thought-submission col-md-10 col-md-offset-1">
-  <form role="form" class="form-horizontal" id="thought-form" action="/post/store/" method="post">
+  <form role="form" class="form-horizontal" id="thought-form" action="/" method="post">
 
 
 
