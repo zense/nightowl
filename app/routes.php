@@ -29,7 +29,7 @@ Route::get('/{name}', 'UserController@profile');
 Route::get('/profile/edit', 'UserController@edit');
 Route::post('/profile/edit', 'UserController@update');
 
-Route::post('/ux', 'PageController@store');
+Route::post('/post/store', 'PageController@store');
 
 Route::get('{username}/follow','UserController@follow');
 Route::get('{username}/unfollow','UserController@unfollow');

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>NightOwl | Profile</title>
+    <title><?php echo (sizeof($name)==0)?$name:$username;?> | NightOwl</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -36,13 +36,21 @@
 
           <div class="row" id="main-content">
             <div class="col-md-12">
-	    <h1 id="site-logo">
-              <a href="<?php echo URL::to('/'.$username);?>"><?php echo $name;?>'s Profile</a>
-            </h1>
+	            <h1 id="site-logo">
+              <a href="<?php echo URL::to('/'.$username);?>"><?php echo (empty($name))?$username:$name;?></a>
             @if ($following == 1)
-            <button type="button" id="follow" class="btn btn-success" data-dismiss="alert">Following</button>
+            <button type="button" id="follow" class="btn btn-success">Following</button>
             @elseif ($following == 0)
-            <button type="button" id="follow" class="btn btn-primary" data-dismiss="alert">Follow</button>
+            <button type="button" id="follow" class="btn btn-primary">Follow</button>
+            @else
+            <a type="button" id="edit" class="btn btn-primary" href="profile/edit">Edit Profile</a>
+            @endif
+              </h1>
+            @if ($following == -1)
+            <h3>
+            <a href="<?php echo URL::to('/'.$username);?>" class="thought-input-label">@<?php echo $username; ?></a>
+            <a class="thought-input-label" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
+            </h3>
             @endif
 @if ($errors->any())
 <div class="alert alert-warning alert-dismissible" role="alert">
@@ -59,7 +67,8 @@
 @endif
 
   <hr>
-
+  <h4>Thoughts</h4>
+  <hr>
   <div class="thought-list row">
     <div class="col-md-10 col-md-offset-1">
         @foreach($posts as $key => $value)

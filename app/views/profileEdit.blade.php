@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>NightOwl | Profile</title>
+    <title>Edit Profile | NightOwl</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -37,7 +37,7 @@
           <div class="row" id="main-content">
             <div class="col-md-12">
 	    <h1 id="site-logo">
-              <a href="<?php echo URL::to('/'.$username);?>"><?php echo $username;?> Profile</a>
+              <a href="<?php echo URL::to('/'.$username);?>"><?php echo (sizeof($name)==0)?$name:$username;?></a>
             </h1>
 @if ($errors->any())
 <div class="alert alert-warning alert-dismissible" role="alert">
@@ -58,18 +58,24 @@
 <div class="row">
 
 <div class="thought-submission col-md-10 col-md-offset-1">
-  {{ Form::open(array('/profile/edit','POST')) }}
+
+  {{ Form::open(array('/profile/edit','POST','class'=>'form-horizontal', 'id'=>'thought-form' )) }}
   {{ Form::hidden('id', $id) }}
-  {{ Form::text('username', $username) }}
-  {{ Form::text('name', $name) }}
-  {{ Form::text('email', $email) }}
-    <div class="form-group">
+  <div class="form-group">
+  <label class="thought-input-label" for="username">Username</label>  {{ Form::text('username', $username,array('class'=>'form-control')) }}
+  </div>
+  <div class="form-group">
+  <label class="thought-input-label" for="name">Name</label>  {{ Form::text('name', $name,array('class'=>'form-control')) }}
+  </div>
+  <div class="form-group">
+  <label class="thought-input-label" for="email">Email</label>  {{ Form::email('email', $email,array('class'=>'form-control')) }}
+  </div>
+  <div class="form-group">
       <button type="submit" class="btn btn-primary pull-right">
         Submit
       </button>
-    </div>
-
   {{ Form::close() }}
+  </div>
 </div>
 
 

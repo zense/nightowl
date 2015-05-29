@@ -20,7 +20,11 @@
 }
 
 .thought-input-label {
-  display: none;
+  display: block;
+}
+
+#follow, #edit {
+  float: right;
 }
 
 #about-info li {
