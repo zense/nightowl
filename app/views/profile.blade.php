@@ -46,12 +46,13 @@
             <a type="button" id="edit" class="btn btn-primary" href="profile/edit">Edit Profile</a>
             @endif
               </h1>
-            @if ($following == -1)
+
             <h3>
             <a href="<?php echo URL::to('/'.$username);?>" class="thought-input-label">@<?php echo $username; ?></a>
+            @if ($following == -1)
             <a class="thought-input-label" href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
-            </h3>
             @endif
+            </h3>
 @if ($errors->any())
 <div class="alert alert-warning alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
