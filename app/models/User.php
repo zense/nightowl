@@ -57,6 +57,9 @@ class User extends Eloquent {
 	public function getFeed()
   {
     $userIds = $this->following()->lists('follow_id');
+		if(count($userIds)==0){
+			return Post::all()->latest()->get();
+		}
     $userIds[] = $this->id;
     return Post::whereIn('user', $userIds)->latest()->get();
 	}
