@@ -50,7 +50,6 @@ App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
 });
-
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler
@@ -61,7 +60,6 @@ App::error(function(Exception $exception, $code)
 | to the user if maintenance mode is in effect for the application.
 |
 */
-
 App::down(function()
 {
 	return Response::make("Be right back!", 503);
