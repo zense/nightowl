@@ -17,6 +17,10 @@ Keep those extension cords from getting tangled.xample controller method to
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
+	public function index()
+	{
+		return View::make('allPosts')->with('posts',Post::all());
+	}
 
 	public function buildPage($code)
 	{

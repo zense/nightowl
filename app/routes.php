@@ -32,6 +32,7 @@ Route::get('/blog', function(){
 });
 
 Route::get('/users', 'UserController@index');
+Route::get('/posts', 'PageController@index');
 Route::get('/{name}', 'UserController@profile');
 Route::get('/profile/edit', 'UserController@edit');
 Route::post('/profile/edit', 'UserController@update');
