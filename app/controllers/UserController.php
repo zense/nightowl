@@ -124,7 +124,6 @@ class UserController extends BaseController {
 				$following = 0;
 			}
 		}
-		return $following;
 		return View::make('profile',$user)->with('posts', $posts)->with('following',$following);
 	}
 
