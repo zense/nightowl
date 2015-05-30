@@ -13,15 +13,14 @@
 
 App::before(function($request)
 {
-	$session = SessionModel::find(Session::getId());
-	$session->IP = Request::getClientIp();
-	$session->save();
 });
 
 
 App::after(function($request, $response)
 {
-  //
+	$session = SessionModel::find(Session::getId());
+	$session->IP = Request::getClientIp();
+	$session->save();
 });
 
 /*
