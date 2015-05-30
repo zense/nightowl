@@ -30,6 +30,8 @@ Route::get('/about', function(){
 Route::get('/blog', function(){
 	return Redirect::to('http://arkokoley.github.io/');
 });
+
+Route::get('/users', 'UserController@index');
 Route::get('/{name}', 'UserController@profile');
 Route::get('/profile/edit', 'UserController@edit');
 Route::post('/profile/edit', 'UserController@update');

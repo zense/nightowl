@@ -9,7 +9,7 @@ class UserController extends BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('userList')->with('users',User::all());
 	}
 
 
