@@ -120,8 +120,11 @@ class UserController extends BaseController {
 					break;
 				}
 			}
-			$following = ($following==-1)? 0:1;
+			if($following == -1){
+				$following = 0;
+			}
 		}
+		return $following;
 		return View::make('profile',$user)->with('posts', $posts)->with('following',$following);
 	}
 
@@ -132,7 +135,7 @@ class UserController extends BaseController {
 			return json_encode(array('status' => '-1', 'message' => 'You cannot unfollow yourself'));
 		}
 		else if ($user1 && $user2) {
-			$user1->following()->save($user2);
+			$user1->following()->detach($user2);
 			return json_encode(array('status' => '1', 'message' => 'Unfollowed '.$user2->name));
 		}
 		return json_encode(array('status' => '0', 'message' => 'Error'));
@@ -144,7 +147,7 @@ class UserController extends BaseController {
 			return json_encode(array('status' => '-1', 'message' => 'You cannot follow yourself'));
 		}
 		else if ($user1 && $user2) {
-			$user1->following()->detach($user2);
+			$user1->following()->save($user2);
 			return json_encode(array('status' => '1', 'message' => 'Followed '.$user2->name));
 		}
 		return json_encode(array('status' => '0', 'message' => 'Error'));
