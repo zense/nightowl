@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => getenv('OPENSHIFT_MYSQL_DB_HOST') ? 'mysql' : 'pgsql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -48,16 +48,17 @@ return array(
 
 		'sqlite' => array(
 			'driver'   => 'sqlite',
-			'database' => __DIR__.'/../database/production.sqlite',
+			'database' => storage_path().'production.sqlite',
 			'prefix'   => '',
 		),
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'root',
-			'username'  => 'root',
-			'password'  => 'thanks123',
+			'host'      => getenv('OPENSHIFT_MYSQL_DB_HOST'),
+			'port'      => getenv('OPENSHIFT_MYSQL_DB_PORT'),
+			'database'  => getenv('OPENSHIFT_APP_NAME'),
+			'username'  => getenv('OPENSHIFT_MYSQL_DB_USERNAME'),
+			'password'  => getenv('OPENSHIFT_MYSQL_DB_PASSWORD'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -65,10 +66,11 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'forge',
-			'username' => 'forge',
-			'password' => '',
+			'host'     => getenv('OPENSHIFT_POSTGRESQL_DB_HOST'),
+			'port'     => getenv('OPENSHIFT_POSTGRESQL_DB_PORT'),
+			'database' => getenv('OPENSHIFT_APP_NAME'),
+			'username' => getenv('OPENSHIFT_POSTGRESQL_DB_USERNAME'),
+			'password' => getenv('OPENSHIFT_POSTGRESQL_DB_PASSWORD'),
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',

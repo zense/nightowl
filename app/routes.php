@@ -20,7 +20,7 @@ Route::get('/', function()
 
 Route::get('/u/{code}', 'PageController@buildPage');
 Route::get('/rest/posts/', 'RestController@getPosts');
-Route::get('/rest/addpost/', 'RestController@addPost');
+Route::post('/rest/addpost/', 'RestController@addPost');
 
 
 Route::get('/profile', function(){
