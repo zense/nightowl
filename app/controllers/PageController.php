@@ -10,7 +10,7 @@ class PageController extends BaseController {
 	| You may wish to use controllers instead of, or in addition to, Closure
 	| based routes. That's great! Here is an eLifehacker
 30 mins ·
-
+    
 Keep those extension cords from getting tangled.xample controller method to
 	| get you started. To route to this controller, just add the route:
 	|
@@ -21,6 +21,29 @@ Keep those extension cords from getting tangled.xample controller method to
 	{
 		return View::make('allPosts')->with('posts',Post::all());
 	}
+
+    public function rest($code){
+        $user = User::getbyCode($code);
+        if(!$user){
+            $username = hash('crc32',$code);
+            //return $id;
+            $user =  User::create(array('code'=>$code, 'username'=>$username));
+        }
+        $posts = $user->getFeed();
+        return json_decode($posts);
+        //return View::make('2',$user)->with(array('posts' => $posts, 'url' => $user->getURL()));
+    }
+
+    public function getPosts($code){
+        $user = User::getbyCode($code);
+        if(!$user){
+            $username = hash('crc32',$code);
+            //return $id;
+            $user =  User::create(array('code'=>$code, 'username'=>$username));
+        }
+        $posts = $user->getFeed();
+        return json_decode($posts);
+    }
 
 	public function buildPage($code)
 	{
@@ -49,11 +72,11 @@ Keep those extension cords from getting tangled.xample controller method to
                 ->withErrors($validator);
         } else {
             // store
-	    $code = '/u/'.Session::getId();
+	        $code = '/u/'.Session::getId();
 			$post = new Post(Input::all());
 			$user = User::getbyName(Input::get('username'));
 			$user->posts()->save($post);
-      return Redirect::to($code)->withMessage('Done!');
+            return Redirect::to($code)->withMessage('Done!');
         }
     }
 }

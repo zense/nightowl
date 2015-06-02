@@ -19,7 +19,9 @@ Route::get('/', function()
 });
 
 Route::get('/u/{code}', 'PageController@buildPage');
-Route::get('/rest/posts/{code}', 'RestController@getPosts');
+Route::get('/rest/posts/', 'RestController@getPosts');
+Route::get('/rest/addpost/', 'RestController@addPost');
+
 
 Route::get('/profile', function(){
 	$user = User::getbyCode(Session::getId());

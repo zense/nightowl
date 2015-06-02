@@ -8,6 +8,10 @@ class Post extends Eloquent {
     return Post::where('user','!=',$id)->take(10)->get();
   }
 
+  public static function get5RandomPostsJson($id){
+    return json_encode(Post::where('user', '!=', $id)->take(10)->get());
+  }
+
   public function author(){
     return $this->belongsTo('User','user','id');
   }

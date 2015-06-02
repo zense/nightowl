@@ -23,7 +23,8 @@ Keep those extension cords from getting tangled.xample controller method to
     }
 
 
-    public function getPosts($code){
+    public function getPosts(){
+        $code = Session::getId();
         $user = User::getbyCode($code);
         if(!$user){
             $username = hash('crc32',$code);
@@ -31,7 +32,38 @@ Keep those extension cords from getting tangled.xample controller method to
             $user =  User::create(array('code'=>$code, 'username'=>$username));
         }
         $posts = $user->getFeed();
-        return json_decode($posts);
+        return $posts;
+    }
+
+    public function addPost()
+    {
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        /*
+         * Need to change this method into post method
+         * Currently it's using get method
+         */
+        $rules = array(
+            'username'  => 'required',
+            'text'      => 'required'
+        );
+        $validator = Validator::make(Input::all(), $rules);
+
+        // process the login
+        if ($validator->fails()) {
+            $status = array('status'=>0, 'error'=>$validator);
+            header('Content-Type: application/json');
+            return json_encode($status);
+        } else {
+            // store
+            $code = '/u/'.Session::getId();
+            $post = new Post(Input::all());
+            $user = User::getbyName(Input::get('username'));
+            $user->posts()->save($post);
+            $status = array('status'=>1, 'message'=>'Done');
+            header('Content-Type: application/json');
+            return json_encode($status);
+        }
     }
 
 }
