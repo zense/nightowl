@@ -59,7 +59,7 @@ class User extends Eloquent {
     $userIds = $this->following()->lists('follow_id');
     $userIds[] = $this->id;
 		$posts = Post::whereIn('user', $userIds)->latest()->get();
-		$RandomPosts = Post::whereNotIn('user',$userIds)->take(10)->get();
+		$RandomPosts = Post::whereNotIn('user',$userIds)->take(10)->latest()->get();
 		return $posts->merge($RandomPosts);
 	}
 }
