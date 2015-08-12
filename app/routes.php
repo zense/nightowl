@@ -12,15 +12,11 @@
 */
 Route::model('user', 'User');
 
-Route::get('/', function()
-{	$code = '/u/';
-	$code .= Session::getId();
-	return Redirect::to($code);
-});
+Route::get('/', 'PageController@home');
 
-Route::get('/u/{code}', 'PageController@buildPage');
+//Route::get('/u/{code}', 'PageController@buildPage');
 Route::get('/rest/posts/', 'RestController@getPosts');
-Route::post('/rest/addpost/', 'RestController@addPost');
+Route::match(array('GET', 'POST'),'/rest/addpost/', 'RestController@addPost');
 
 
 Route::get('/profile', function(){

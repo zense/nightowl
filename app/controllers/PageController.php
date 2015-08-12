@@ -10,7 +10,7 @@ class PageController extends BaseController {
 	| You may wish to use controllers instead of, or in addition to, Closure
 	| based routes. That's great! Here is an eLifehacker
 30 mins ·
-    
+
 Keep those extension cords from getting tangled.xample controller method to
 	| get you started. To route to this controller, just add the route:
 	|
@@ -45,8 +45,9 @@ Keep those extension cords from getting tangled.xample controller method to
         return json_decode($posts);
     }
 
-	public function buildPage($code)
+	public function home()
 	{
+		$code = Session::getId();
 		$user = User::getbyCode($code);
 		if(!$user){
 			$username = hash('crc32',$code);
@@ -76,7 +77,7 @@ Keep those extension cords from getting tangled.xample controller method to
 			$post = new Post(Input::all());
 			$user = User::getbyName(Input::get('username'));
 			$user->posts()->save($post);
-            return Redirect::to($code)->withMessage('Done!');
+            return Redirect::to('/')->withMessage('Done!');
         }
     }
 }
