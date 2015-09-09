@@ -7,10 +7,10 @@ Feed
     <div class="col-md-10 col-md-offset-1">
         @foreach($posts as $key => $value)
       <div class="thought ">
-        <div class="thought-content text-center">{{ $value->text }}</div>
+        <div class="thought-content text-center">{{{ $value->text }}}</div>
         <div class="thought-footer">
           <span class="pull-right">
-            <em>— <a href="<?php echo URL::to('/'.$value->author->username); ?>">{{ $value->author->username }}</a></em>
+            <em>— <a href="<?php echo URL::to('/'.$value->author->username); ?>">{{{ $value->author->username }}}</a></em>
           </span>
         </div>
       </div>
@@ -45,7 +45,7 @@ Feed
 <div class="row user-info">
   <div class="col-md-12">
     <h3>Who You Are</h3>
-    <div>You are <a href="<?php echo URL::to('/profile'); ?>"><?php echo $username;?></a></div>
+    <div>You are <a href="<?php echo URL::to('/profile'); ?>">{{{ $username }}}</a></div>
 
       <div>
         You should bookmark this link: <a href="<?php echo $url; ?>"><?php echo $url; ?></a> as it is your

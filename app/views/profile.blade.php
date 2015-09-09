@@ -28,10 +28,10 @@
     <div class="col-md-10 col-md-offset-1">
         @foreach($posts as $key => $value)
       <div class="thought ">
-        <div class="thought-content text-center">{{ $value->text }}</div>
+        <div class="thought-content text-center">{{{ $value->text }}}</div>
         <div class="thought-footer">
           <span class="pull-right">
-            <em>— {{ $value->updated_at }}</em>
+            <em>{{ $value->updated_at }}</em>
           </span>
         </div>
       </div>
