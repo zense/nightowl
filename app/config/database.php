@@ -1,5 +1,10 @@
 <?php
+$url = parse_url(getenv("DATABASE_URL"));
 
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
 return array(
 
 	/*
@@ -26,7 +31,7 @@ return array(
 	|
 	*/
 
-	'default' => getenv('OPENSHIFT_MYSQL_DB_HOST') ? 'mysql' : 'pgsql',
+	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -53,27 +58,26 @@ return array(
 		),
 
 		'mysql' => array(
-			'driver'    => 'mysql',
-			'host'      => getenv('OPENSHIFT_MYSQL_DB_HOST'),
-			'port'      => getenv('OPENSHIFT_MYSQL_DB_PORT'),
-			'database'  => getenv('OPENSHIFT_APP_NAME'),
-			'username'  => getenv('OPENSHIFT_MYSQL_DB_USERNAME'),
-			'password'  => getenv('OPENSHIFT_MYSQL_DB_PASSWORD'),
+      'driver'    => 'mysql',
+      'host'      => $host,
+      'database'  => $database,
+      'username'  => $username,
+      'password'  => $password,
+      'charset'   => 'utf8',
+      'collation' => 'utf8_unicode_ci',
+      'prefix'    => '',
+    ),
+
+		'pgsql' => array(
+			'driver'    => 'pgsql',
+			'host'      => $host,
+			'database'  => $database,
+			'username'  => $username,
+			'password'  => $password,
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-		),
-
-		'pgsql' => array(
-			'driver'   => 'pgsql',
-			'host'     => getenv('OPENSHIFT_POSTGRESQL_DB_HOST'),
-			'port'     => getenv('OPENSHIFT_POSTGRESQL_DB_PORT'),
-			'database' => getenv('OPENSHIFT_APP_NAME'),
-			'username' => getenv('OPENSHIFT_POSTGRESQL_DB_USERNAME'),
-			'password' => getenv('OPENSHIFT_POSTGRESQL_DB_PASSWORD'),
-			'charset'  => 'utf8',
-			'prefix'   => '',
-			'schema'   => 'public',
+			'schema'    => 'public',
 		),
 
 		'sqlsrv' => array(
