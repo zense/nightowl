@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => substr(getenv('OPENSHIFT_SECRET_KEY'), 0, 31),
+	'key' => "hello12345678901",
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 

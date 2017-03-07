@@ -17,7 +17,7 @@ class CreatPostsTable extends Migration {
 			$table->increments('id');
 			$table->integer('user')->unsigned();
 			$table->text('text');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

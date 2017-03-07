@@ -16,8 +16,7 @@ class CreateSessionTable extends Migration {
 			$t->string('id')->unique();
 			$t->text('payload');
 			$t->integer('last_activity');
-			$t->string('IP',45);
-			$t->timestamp('updated_at');
+			$t->timestamp('updated_at')->nullable();
 		});
 	}
 

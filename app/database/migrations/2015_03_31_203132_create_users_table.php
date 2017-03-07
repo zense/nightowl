@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->string('name')->nullable();
 			$table->string('email')->nullable();
 			$table->boolean('active')->default(1);
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

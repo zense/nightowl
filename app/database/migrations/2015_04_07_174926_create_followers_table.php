@@ -15,7 +15,7 @@ class CreateFollowersTable extends Migration {
 		Schema::create('followers', function ($table){
 		    $table->integer('user_id')->unsigned();
 		    $table->integer('follow_id')->unsigned();
-		    $table->timestamps();
+		    $table->nullableTimestamps();
 				$table->unique(array('user_id','follow_id'));
 		});
 	}
