@@ -13,7 +13,7 @@ Edit Profile
 <div class="thought-submission col-md-10 col-md-offset-1">
   <form role="form" class="form-horizontal" id="thought-form" action="/profile/edit" method="post">
     <input name="id" value="{{ $id }}" type="hidden">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    {{ csrf_field() }}
   <div class="form-group">
     <label class="thought-input-label" for="username">Username</label>
     <input name="username" value="{{ $username }}" type="string" class="form-control">

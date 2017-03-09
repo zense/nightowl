@@ -24,7 +24,7 @@ Feed
     <div class="thought-submission col-md-10 col-md-offset-1">
       <form role="form" class="form-horizontal" id="thought-form" action="/" method="post">
         <input name="username" value="{{ $username }}" type="hidden">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        {{ csrf_field() }}
         <div class="form-group">
           <label for="content" class="thought-input-label">Your Thoughts</label>
           <textarea id="content" name="text" class="form-control" placeholder="Your Thoughts..." rows="5"></textarea>
