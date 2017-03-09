@@ -10,9 +10,9 @@ NightOwl
   sudo apt-get install php5.6
   sudo apt-get install php5.6-mbstring php5.6-mcrypt php5.6-mysql php5.6-xml
   ```
-  
+
   For OSX
-  
+
   ```
   brew install php56 php56-mcrypt
   ```
@@ -20,7 +20,9 @@ NightOwl
 2. Mysql
 
 # To run
-
 1. create a DB named nightowl
-2. `DATABASE_URL=mysql://root:password@localhost/nightowl php artisan migrate`
-3. `DATABASE_URL=mysql://root:password@localhost/nightowl php artisan serve`
+2. `composer install`
+3. `php artisan key:generate`
+4. rename .env.example to .env and change the DB details
+5. `php artisan migrate`
+6. `php artisan serve`
