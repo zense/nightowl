@@ -7,9 +7,11 @@ Feed
     <div class="col-md-10 col-md-offset-1">
         @foreach($posts as $key => $value)
       <div class="thought ">
-        <div class="thought-content text-center">{{{ $value->text }}}</div>
+        <div class="thought-content text-left">{{{ $value->text }}}</div>
+        <button type="button" id="Like" class="btn like">Like</button>
+        <button type="button" id="Unlike" class="btn dislike">Unlike</button>
         <div class="thought-footer">
-          <span class="pull-right">
+          <span class="pull-right ">
             <em>— <a href="<?php echo URL::to('/'.$value->author->username); ?>">{{{ $value->author->username }}}</a></em>
           </span>
         </div>
