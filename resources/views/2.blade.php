@@ -8,6 +8,7 @@ Feed
         @foreach($posts as $key => $value)
       <div class="thought ">
         <div class="thought-content text-left">{{{ $value->text }}}</div>
+<<<<<<< HEAD
 
         {{{ $value->likes }}}
         <button type="button" class="btn btn-default btn-sm" id="like">
@@ -19,6 +20,10 @@ Feed
           <image img src="/images/dislike.png" alt="Logo" height='20' breadth='20' onclick="dislike()"></image> Unlike
         </button>
 
+=======
+        <button type="button" id="Like" class="btn like">Like</button>
+        <button type="button" id="Unlike" class="btn dislike">Unlike</button>
+>>>>>>> 677eaee23dfdb288ca1c68ad81b959182718e217
         <div class="thought-footer">
           <span class="pull-right ">
             <em>— <a href="<?php echo URL::to('/'.$value->author->username); ?>">{{{ $value->author->username }}}</a></em>
