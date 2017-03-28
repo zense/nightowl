@@ -11,8 +11,30 @@
   margin-bottom: 6em;
 }
 
+.like{
+  float:left;
+  color: #ffffff;
+  background-color: #375a7f;
+  border-color: #375a7f;
+  text-align: center;
+}
+
+.dislike{
+  float:left;
+  margin-left:0.5em;
+  color: #ffffff;
+  background-color: #375a7f;
+  border-color: #375a7f;
+  text-align: center;
+}
+
 .thought-content {
   white-space: pre-line;
+}
+
+.likes-dislikes {
+  float: left;
+  display: inline-block;
 }
 
 .debug-info {

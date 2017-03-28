@@ -1,11 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreatPostsTable extends Migration {
-
 	/**
 	 * Run the migrations.
 	 *
@@ -17,11 +14,12 @@ class CreatPostsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('user')->unsigned();
+			$table->integer('likes')->default(0);
+			$table->integer('dislikes')->default(0);
 			$table->text('text');
 			$table->timestamps();
 		});
 	}
-
 	/**
 	 * Reverse the migrations.
 	 *
@@ -31,5 +29,4 @@ class CreatPostsTable extends Migration {
 	{
 		Schema::dropIfExists('posts');
 	}
-
 }
