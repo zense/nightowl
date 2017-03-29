@@ -77,6 +77,7 @@ class UserController extends Controller {
 	{
 		// validate
 		// read more on validation at http://laravel.com/docs/validation
+		dd(Request::all());
 		$rules = array(
 			'email'      => 'email',
 			'username'   => 'required'

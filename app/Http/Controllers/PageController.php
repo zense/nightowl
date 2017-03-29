@@ -66,6 +66,7 @@ Keep those extension cords from getting tangled.xample controller method to
 		$posts = $user->getFeed();
     return View::make('2',$user)->with(array('posts' => $posts, 'url' => $user->getURL()));
 	}
+
     public function store()
     {
         // validate
@@ -88,5 +89,14 @@ Keep those extension cords from getting tangled.xample controller method to
 			$user->posts()->save($post);
             return Redirect::to('/')->withMessage('Done!');
         }
+    }
+
+    public function updateUpvotes($id)
+    {
+        $postObj = Post::getbyId($id);
+        $postObj->upvotes+=1;
+        $postObj->save();
+        return Redirect::to('/');
+    
     }
 }

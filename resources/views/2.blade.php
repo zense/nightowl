@@ -9,14 +9,38 @@ Feed
       <div class="thought ">
         <div class="thought-content text-left">{{{ $value->text }}}</div>
 
-        {{{ $value->likes }}}
-        <button type="button" class="btn btn-default btn-sm" id="like">
-          <image img src="/images/like.png" alt="Logo" height='20' breadth='20' onclick="like()"></image> Like
-        </button>
+        {{{ $value->upvotes }}}
+        <a type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}a' onclick="uVote('{{{ $value->id }}}a');" href="/upvote/{{{ $value->id}}}">
+          <image img src="/images/like.png" alt="Logo" height='20' breadth='20'></image> Upvote
+          <script type="text/javascript">
+            function uVote(id)
+            { 
+              var elem = document.getElementById(id);
+              if (elem.innerHTML=="Like") 
+              {
+                elem.innerHTML = "Liked";
+                elem.src = "/images/dislike.png";
+              }
+              else 
+              {
+                  elem.innerHTML = "Like";
+                  elem.src = "/images/dislike.png";
+              }
+            }
+          </script>
+        </a>
 
-        {{{ $value->dislikes }}}
-        <button type="button" class="btn btn-default btn-sm" id="dislike">
-          <image img src="/images/dislike.png" alt="Logo" height='20' breadth='20' onclick="dislike()"></image> Unlike
+        {{{ $value->downvotes }}}
+        <button type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}b' onclick="dVote('{{{ $value->id }}}b' );">
+          <image img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></image> Downvote
+           <script type="text/javascript">
+            function dVote(id) // no ';' here
+            { 
+              var elem = document.getElementById(id);
+              if (elem.innerHTML=="Dislike") elem.innerHTML = "Disliked";
+              else elem.innerHTML = "Dislike";
+            }
+          </script>
         </button>
 
         <div class="thought-footer">

@@ -14,8 +14,8 @@ class CreatPostsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('user')->unsigned();
-			$table->integer('likes')->default(0);
-			$table->integer('dislikes')->default(0);
+			$table->integer('upvotes')->default(0);
+			$table->integer('downvotes')->default(0);
 			$table->text('text');
 			$table->timestamps();
 		});

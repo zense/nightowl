@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model {
   protected $table = 'posts';
-  protected $fillable = array('user', 'text');
+  protected $fillable = array('user', 'text', 'likes');
 
   public static function get5RandomPosts($id) {
     return Post::where('user','!=',$id)->latest()->take(10)->get();
@@ -17,5 +17,10 @@ class Post extends Model {
 
   public function author(){
     return $this->belongsTo('App\User','user','id');
+  }
+
+  public static function getbyId($id)
+  {
+    return Post::where('id','=',$id)->first();
   }
 }
