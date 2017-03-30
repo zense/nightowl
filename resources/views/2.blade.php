@@ -16,15 +16,14 @@ Feed
             function uVote(id)
             { 
               var elem = document.getElementById(id);
-              if (elem.innerHTML=="Like") 
+              if (elem.innerHTML=="Upvoted") 
               {
-                elem.innerHTML = "Liked";
-                elem.src = "/images/dislike.png";
+                elem.innerHTML = "Upvote";
               }
               else 
               {
-                  elem.innerHTML = "Like";
-                  elem.src = "/images/dislike.png";
+                  elem.innerHTML = "Upvoted";
+
               }
             }
           </script>
@@ -32,13 +31,22 @@ Feed
 
         {{{ $value->downvotes }}}
         <button type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}b' onclick="dVote('{{{ $value->id }}}b' );">
-          <image img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></image> Downvote
+          <image img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></image>Downvote
            <script type="text/javascript">
-            function dVote(id) // no ';' here
+            function dVote(id) 
             { 
               var elem = document.getElementById(id);
-              if (elem.innerHTML=="Dislike") elem.innerHTML = "Disliked";
-              else elem.innerHTML = "Dislike";
+              if (elem.innerHTML=="Downvoted") 
+              {
+                elem.innerHTML = "Downvote";
+                elem.src="/images/like.png";
+
+              }
+              else
+              {
+                 elem.innerHTML = "Downvoted";
+                 elem.src="/images/like.png";
+              }
             }
           </script>
         </button>
