@@ -10,29 +10,37 @@ Feed
         <div class="thought-content text-left">{{{ $value->text }}}</div>
 
         {{{ $value->upvotes }}}
-        <a type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}a' onclick="uVote('{{{ $value->id }}}a');" href="/upvote/{{{ $value->id}}}">
-          <image img src="/images/like.png" alt="Logo" height='20' breadth='20'></image> Upvote
-          <script type="text/javascript">
-            function uVote(id)
+        <button type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}a' >    
+        <image img src="/images/like.png" alt="Logo" height='20' breadth='20'></image> Upvote
+        </button>
+        <script type="text/javascript" language="javascript">
+          var id="{{{ $value->id}}}";
+          var btn = document.getElementById("{{{ $value->id }}}a");
+            btn.addEventListener("click", function(id) 
             { 
-              var elem = document.getElementById(id);
-              if (elem.innerHTML=="Upvoted") 
-              {
-                elem.innerHTML = "Upvote";
-              }
-              else 
-              {
-                  elem.innerHTML = "Upvoted";
-
-              }
-            }
+                var ourRequest = new XMLHttpRequest();
+                ourRequest.open('GET','/upvote/{id}');
+                console.log(ourRequest);
+                ourRequest.onload = function() 
+                {
+                  if (ourRequest.status >= 200 && ourRequest.status < 400) 
+                  {
+                    var ourData = JSON.parse(ourRequest.responseText);
+                    console.log(ourData);
+                  } 
+                  else 
+                  {
+                    console.log("We connected to the server, but it returned an error.");
+                  }
+                }
+            });
           </script>
-        </a>
 
         {{{ $value->downvotes }}}
         <button type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}b' onclick="dVote('{{{ $value->id }}}b' );">
-          <image img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></image>Downvote
-           <script type="text/javascript">
+        <image img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></image>Downvote   
+        </button>
+        <script type="text/javascript">
             function dVote(id) 
             { 
               var elem = document.getElementById(id);
@@ -49,7 +57,6 @@ Feed
               }
             }
           </script>
-        </button>
 
         <div class="thought-footer">
           <span class="pull-right ">
