@@ -96,7 +96,6 @@ Keep those extension cords from getting tangled.xample controller method to
         $postObj = Post::getbyId($id);
         $postObj->upvotes+=1;
         $postObj->save();
-        return Redirect::to('/');
-    
+        return $postObj->upvotes;
     }
 }

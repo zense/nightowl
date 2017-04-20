@@ -8,31 +8,43 @@ Feed
         @foreach($posts as $key => $value)
       <div class="thought ">
         <div class="thought-content text-left">{{{ $value->text }}}</div>
-
+        <br>
+        <span id="no1">
         {{{ $value->upvotes }}}
-        <a type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}a' onclick="uVote('{{{ $value->id }}}a');" href="/upvote/{{{ $value->id}}}">
-          <image img src="/images/like.png" alt="Logo" height='20' breadth='20'></image> Upvote
-          <script type="text/javascript">
-            function uVote(id)
-            { 
-              var elem = document.getElementById(id);
-              if (elem.innerHTML=="Upvoted") 
-              {
-                elem.innerHTML = "Upvote";
-              }
-              else 
-              {
-                  elem.innerHTML = "Upvoted";
-
-              }
-            }
+        </span>
+        <button type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}a' >    
+        <img img src="/images/like.png" alt="Logo" height='20' breadth='20'></img> Upvote
+        </button>
+        <script type="text/javascript" language="javascript">
+          var id="{{{ $value->id}}}";
+          var btn = document.getElementById("{{{ $value->id }}}a");
+          var label = document.getElementById("no1");
+            btn.addEventListener("click", function(e) 
+            {   id = e.target.id;
+                var ourRequest = new XMLHttpRequest();
+                ourRequest.open('GET','/upvote/'+id);
+                ourRequest.onload = function() 
+                {
+                  if (ourRequest.status >= 200 && ourRequest.status < 400) 
+                  {
+                    var ourData = JSON.parse(ourRequest.responseText);
+                    console.log(ourData);
+                    label.innerHTML=ourData;
+                  } 
+                  else 
+                  {
+                    console.log("We connected to the server, but it returned an error.");
+                  }
+                }
+                ourRequest.send();
+            });
           </script>
-        </a>
 
         {{{ $value->downvotes }}}
         <button type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}b' onclick="dVote('{{{ $value->id }}}b' );">
-          <image img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></image>Downvote
-           <script type="text/javascript">
+        <img img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></img>Downvote   
+        </button>
+        <script type="text/javascript">
             function dVote(id) 
             { 
               var elem = document.getElementById(id);
@@ -49,7 +61,6 @@ Feed
               }
             }
           </script>
-        </button>
 
         <div class="thought-footer">
           <span class="pull-right ">
@@ -107,4 +118,34 @@ Feed
     </div>
   </div>
 </div>
+
+<!--
+<script type="text/javascript" language="javascript">
+  var btns = document.getElementsByClassName("upvote");
+  var labels = document.getElementsByClassName("upvotes_lable");
+  Array.prototype.forEach.call(btns, function (btn) 
+  { 
+      btn.addEventListener("click", function(e) 
+      {   
+        id = e.target.id;
+        var ourRequest = new XMLHttpRequest();
+        ourRequest.open('GET','/upvote/'+id);
+        ourRequest.onload = function() 
+        {
+          if (ourRequest.status >= 200 && ourRequest.status < 400) 
+          {
+            var ourData = JSON.parse(ourRequest.responseText);
+
+          } 
+          else 
+          {
+            console.log("We connected to the server, but it returned an error.");
+          }
+        }
+        ourRequest.send();
+      });
+  });
+</script>
+-->
+
 @stop
