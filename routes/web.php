@@ -44,3 +44,7 @@ Route::get('{username}/follow','UserController@follow');
 Route::get('{username}/unfollow','UserController@unfollow');
 
 Route::get('/upvote/{id}', 'PageController@updateUpvotes');
+Route::get('/unupvote/{id}', 'PageController@updateunUpvotes');
+
+Route::get('/downvote/{id}', 'PageController@updateDownvotes');
+Route::get('/undownvote/{id}', 'PageController@updateunDownvotes');

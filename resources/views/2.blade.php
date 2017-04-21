@@ -9,58 +9,19 @@ Feed
       <div class="thought ">
         <div class="thought-content text-left">{{{ $value->text }}}</div>
         <br>
-        <span id="no1">
+        <span id="{{{ $value->id }}}a" class="upvotes_lable">
         {{{ $value->upvotes }}}
         </span>
-        <button type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}a' >    
+        <button type="button" class="btn btn-default btn-sm upvote" id='{{{ $value->id }}}a' >
         <img img src="/images/like.png" alt="Logo" height='20' breadth='20'></img> Upvote
         </button>
-        <script type="text/javascript" language="javascript">
-          var id="{{{ $value->id}}}";
-          var btn = document.getElementById("{{{ $value->id }}}a");
-          var label = document.getElementById("no1");
-            btn.addEventListener("click", function(e) 
-            {   id = e.target.id;
-                var ourRequest = new XMLHttpRequest();
-                ourRequest.open('GET','/upvote/'+id);
-                ourRequest.onload = function() 
-                {
-                  if (ourRequest.status >= 200 && ourRequest.status < 400) 
-                  {
-                    var ourData = JSON.parse(ourRequest.responseText);
-                    console.log(ourData);
-                    label.innerHTML=ourData;
-                  } 
-                  else 
-                  {
-                    console.log("We connected to the server, but it returned an error.");
-                  }
-                }
-                ourRequest.send();
-            });
-          </script>
 
+        <span id="{{{ $value->id }}}b" class="downvotes_lable">
         {{{ $value->downvotes }}}
-        <button type="button" class="btn btn-default btn-sm" id='{{{ $value->id }}}b' onclick="dVote('{{{ $value->id }}}b' );">
-        <img img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></img>Downvote   
+        </span>
+        <button type="button" class="btn btn-default btn-sm downvote" id='{{{ $value->id }}}b' >
+        <img img src="/images/dislike.png" alt="Logo" height='20' breadth='20'></img> Downvote
         </button>
-        <script type="text/javascript">
-            function dVote(id) 
-            { 
-              var elem = document.getElementById(id);
-              if (elem.innerHTML=="Downvoted") 
-              {
-                elem.innerHTML = "Downvote";
-                elem.src="/images/like.png";
-
-              }
-              else
-              {
-                 elem.innerHTML = "Downvoted";
-                 elem.src="/images/like.png";
-              }
-            }
-          </script>
 
         <div class="thought-footer">
           <span class="pull-right ">
@@ -119,33 +80,93 @@ Feed
   </div>
 </div>
 
-<!--
+
 <script type="text/javascript" language="javascript">
   var btns = document.getElementsByClassName("upvote");
   var labels = document.getElementsByClassName("upvotes_lable");
-  Array.prototype.forEach.call(btns, function (btn) 
-  { 
-      btn.addEventListener("click", function(e) 
-      {   
+  // console.log(labels);
+  // console.log(btns);
+  Array.prototype.forEach.call(btns, function (btn)
+  {
+
+      btn.addEventListener("click", function(e)
+      {
         id = e.target.id;
         var ourRequest = new XMLHttpRequest();
-        ourRequest.open('GET','/upvote/'+id);
-        ourRequest.onload = function() 
+        if (btn.innerHTML=="Upvoted")
         {
-          if (ourRequest.status >= 200 && ourRequest.status < 400) 
-          {
-            var ourData = JSON.parse(ourRequest.responseText);
+          ourRequest.open('GET','/unupvote/'+id);
+          btn.innerHTML = "Upvote";
+        }
+        else
+        {
+          ourRequest.open('GET','/upvote/'+id);
+          btn.innerHTML = "Upvoted";
+        }
 
-          } 
-          else 
+        ourRequest.onload = function()
+        {
+
+          if (ourRequest.status >= 200 && ourRequest.status < 400)
+          {
+
+            var ourData = JSON.parse(ourRequest.responseText);
+            var label=document.getElementById(id);
+            label.innerHTML=ourData;
+          }
+          else
           {
             console.log("We connected to the server, but it returned an error.");
+
           }
         }
         ourRequest.send();
       });
   });
 </script>
--->
+
+<script type="text/javascript" language="javascript">
+  var btns = document.getElementsByClassName("downvote");
+  var labels = document.getElementsByClassName("downvotes_lable");
+  // console.log(labels);
+  // console.log(btns);
+  Array.prototype.forEach.call(btns, function (btn)
+  {
+
+      btn.addEventListener("click", function(e)
+      {
+        id = e.target.id;
+        var ourRequest = new XMLHttpRequest();
+        if (btn.innerHTML=="Downvoted")
+        {
+          ourRequest.open('GET','/undownvote/'+id);
+          btn.innerHTML = "Downvote";
+        }
+        else
+        {
+          ourRequest.open('GET','/downvote/'+id);
+          btn.innerHTML = "Downvoted";
+        }
+
+        ourRequest.onload = function()
+        {
+
+          if (ourRequest.status >= 200 && ourRequest.status < 400)
+          {
+
+            var ourData = JSON.parse(ourRequest.responseText);
+            var label=document.getElementById(id);
+            label.innerHTML=ourData;
+          }
+          else
+          {
+            console.log("We connected to the server, but it returned an error.");
+
+          }
+        }
+        ourRequest.send();
+      });
+  });
+</script>
 
 @stop
