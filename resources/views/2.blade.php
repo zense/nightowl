@@ -24,7 +24,7 @@ Feed
         </button>
 
         <div class="thought-footer">
-          <span class="pull-right ">
+          <span class="pull-right">
             <em>— <a href="<?php echo URL::to('/'.$value->author->username); ?>">{{{ $value->author->username }}}</a></em>
           </span>
         </div>
@@ -84,11 +84,9 @@ Feed
 <script type="text/javascript" language="javascript">
   var btns = document.getElementsByClassName("upvote");
   var labels = document.getElementsByClassName("upvotes_lable");
-  // console.log(labels);
-  // console.log(btns);
+
   Array.prototype.forEach.call(btns, function (btn)
   {
-
       btn.addEventListener("click", function(e)
       {
         id = e.target.id;
@@ -103,13 +101,10 @@ Feed
           ourRequest.open('GET','/upvote/'+id);
           btn.innerHTML = "Upvoted";
         }
-
         ourRequest.onload = function()
         {
-
           if (ourRequest.status >= 200 && ourRequest.status < 400)
           {
-
             var ourData = JSON.parse(ourRequest.responseText);
             var label=document.getElementById(id);
             label.innerHTML=ourData;
@@ -117,7 +112,6 @@ Feed
           else
           {
             console.log("We connected to the server, but it returned an error.");
-
           }
         }
         ourRequest.send();
@@ -128,11 +122,9 @@ Feed
 <script type="text/javascript" language="javascript">
   var btns = document.getElementsByClassName("downvote");
   var labels = document.getElementsByClassName("downvotes_lable");
-  // console.log(labels);
-  // console.log(btns);
+
   Array.prototype.forEach.call(btns, function (btn)
   {
-
       btn.addEventListener("click", function(e)
       {
         id = e.target.id;
@@ -147,13 +139,10 @@ Feed
           ourRequest.open('GET','/downvote/'+id);
           btn.innerHTML = "Downvoted";
         }
-
         ourRequest.onload = function()
         {
-
           if (ourRequest.status >= 200 && ourRequest.status < 400)
           {
-
             var ourData = JSON.parse(ourRequest.responseText);
             var label=document.getElementById(id);
             label.innerHTML=ourData;
@@ -161,7 +150,6 @@ Feed
           else
           {
             console.log("We connected to the server, but it returned an error.");
-
           }
         }
         ourRequest.send();

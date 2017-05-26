@@ -109,14 +109,14 @@ Keep those extension cords from getting tangled.xample controller method to
 		public function updateDownvotes($id)
     {
         $postObj = Post::getbyId($id);
-        $postObj->downvotes-=1;
+        $postObj->downvotes+=1;
         $postObj->save();
         return $postObj->downvotes;
     }
 		public function updateunDownvotes($id)
     {
         $postObj = Post::getbyId($id);
-        $postObj->downvotes+=1;
+        $postObj->downvotes-=1;
         $postObj->save();
         return $postObj->downvotes;
     }
